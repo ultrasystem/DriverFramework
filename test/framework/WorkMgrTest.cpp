@@ -81,12 +81,19 @@ static bool verifyDelay(WorkHandle &h, uint32_t delay_usec, int *arg)
 
 	cb_counter->unlock();
 
+#ifdef CI_BUILD
+	// On travis, we cannot count on good timing.
+	const unsigned tolerance_us = 50000;
+#else
+
 #ifdef __APPLE__
 	// We need to be generous on Mac.
 	const unsigned tolerance_us = 1500;
 #else
 	const unsigned tolerance_us = 500;
 #endif
+
+#endif // CI_BUILD
 
 	usleep((delay_usec + tolerance_us) * 3);
 	cb_counter->lock();

@@ -28,6 +28,7 @@ addons:
 env:
   global:
     - NINJA_BUILD=1
+    - CI_BUILD=1
 
 script:
   - make run

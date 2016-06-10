@@ -39,11 +39,18 @@
 bool TimeTest::verifyOffsetTime()
 {
 
+#ifdef CI_BUILD
+	// On travis, the timing can be quite off.
+	const float error_factor = 5.0f;
+#else
+
 #ifdef __APPLE__
 	const float error_factor = 1.5f;
 #else
 	const float error_factor = 1.2f;
 #endif
+
+#endif // CI_BUILD
 
 	bool passed = true;
 	uint64_t st = offsetTime();
