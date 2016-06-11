@@ -135,7 +135,7 @@ int HMC5883::start()
 
 	/* Open the device path specified in the class initialization */
 	if (result < 0) {
-		DF_LOG_ERR("Unable to open the device path: %s", m_dev_path);
+		DF_LOG_ERR("Unable to open the device path: %s", m_dev_instance_path);
 		//goto exit;
 		return -1;
 	}
